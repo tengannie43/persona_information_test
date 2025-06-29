@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import PersonaInformationPage from './PersonaInformationPage';
+import KidneyStatusPage from './KidneyStatusPage';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        {/* 預設首頁：登入頁 */}
         <Route path="/" element={<LoginPage />} />
-        {/* 基本資料頁 */}
         <Route path="/persona" element={<PersonaInformationPage />} />
+        <Route path="/kidney" element={<KidneyStatusPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
