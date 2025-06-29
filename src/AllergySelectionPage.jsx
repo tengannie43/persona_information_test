@@ -28,7 +28,7 @@ export default function AllergySelectionPage() {
     }
 
     alert(`你選擇的過敏源：${selectedAllergens.join("、")}\n\n👉 前往下一頁`);
-    // navigate("/next-page"); // 可以改成下一頁路由
+    navigate("/exercise");
   };
 
   return (
