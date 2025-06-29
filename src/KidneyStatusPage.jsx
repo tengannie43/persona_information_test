@@ -15,7 +15,7 @@ export default function KidneyStatusPage() {
 
     alert(`已填寫內容：\nGFR：${gfr} ml/min\nCKD 期數：第 ${ckd} 期\n其他慢性疾病：${disease}\n\n👉 下一頁準備開始！`);
 
-    // 跳轉下一頁（自行修改路徑）
+    // 跳轉下一頁（可修改為你下一個頁面的路由）
     // navigate("/next-page");
   };
 
@@ -32,11 +32,67 @@ export default function KidneyStatusPage() {
 
         <h2 className="text-2xl mb-5">腎病概況</h2>
 
+        {/* GFR 欄位 */}
         <div className="mb-5 text-left">
-          <label className="font-bold mb-2 block">腎絲球過濾率 (GFR)</label>
+          <label htmlFor="gfr" className="font-bold mb-2 block">腎絲球過濾率 (GFR)</label>
           <div className="flex items-center bg-pink-100 p-3 rounded-full justify-between">
             <input
               type="number"
+              id="gfr"
               placeholder="請輸入數值"
               min="0"
-              value={g
+              value={gfr}
+              onChange={(e) => setGfr(e.target.value)}
+              className="bg-transparent outline-none w-3/4"
+            />
+            <span className="text-sm">ml/min</span>
+          </div>
+        </div>
+
+        {/* CKD 期數 */}
+        <div className="mb-5 text-left">
+          <label htmlFor="ckd" className="font-bold mb-2 block">CKD (期數)</label>
+          <select
+            id="ckd"
+            value={ckd}
+            onChange={(e) => setCkd(e.target.value)}
+            className="w-full p-3 rounded-lg bg-pink-100"
+          >
+            <option value="">請選擇</option>
+            <option value="1">第一期</option>
+            <option value="2">第二期</option>
+            <option value="3">第三期</option>
+            <option value="4">第四期</option>
+            <option value="5">第五期</option>
+          </select>
+        </div>
+
+        {/* 慢性疾病 */}
+        <div className="mb-5 text-left">
+          <label htmlFor="disease" className="font-bold mb-2 block">其他慢性疾病</label>
+          <select
+            id="disease"
+            value={disease}
+            onChange={(e) => setDisease(e.target.value)}
+            className="w-full p-3 rounded-lg bg-pink-100"
+          >
+            <option value="">請選擇</option>
+            <option value="高血壓">高血壓</option>
+            <option value="糖尿病">糖尿病</option>
+            <option value="心臟病">心臟病</option>
+            <option value="其他">其他</option>
+            <option value="無">無</option>
+          </select>
+        </div>
+
+        {/* 下一頁按鈕 */}
+        <button
+          onClick={handleNext}
+          className="w-full bg-red-400 text-white py-3 rounded-lg text-lg hover:bg-red-500"
+        >
+          下一頁
+        </button>
+      </div>
+    </div>
+  );
+}
