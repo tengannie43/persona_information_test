@@ -1,67 +1,99 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function AllergySelectionPage() {
-  const [selectedAllergens, setSelectedAllergens] = useState([]);
+export default function KidneyStatusPage() {
+  const [gfr, setGfr] = useState("");
+  const [ckd, setCkd] = useState("");
+  const [disease, setDisease] = useState("");
   const navigate = useNavigate();
 
-  const allergens = [
-    { label: "花生", img: "https://i.postimg.cc/HLgwNp8K/2025-06-10-164139.png" },
-    { label: "堅果類", img: "https://i.postimg.cc/nzVvH0kG/2025-06-10-164130.png" },
-    { label: "牛奶", img: "https://i.postimg.cc/T3mjQy1g/2025-06-10-164152.png" },
-    { label: "海鮮", img: "https://i.postimg.cc/jdD4w3r8/2025-06-10-164204.png" },
-    { label: "無", img: "https://i.postimg.cc/2jnVHPfb/2025-06-10-164853.png" },
-  ];
-
-  const toggleSelection = (allergen) => {
-    if (selectedAllergens.includes(allergen)) {
-      setSelectedAllergens(selectedAllergens.filter(item => item !== allergen));
-    } else {
-      setSelectedAllergens([...selectedAllergens, allergen]);
-    }
-  };
-
   const handleNext = () => {
-    if (selectedAllergens.length === 0) {
-      alert("請至少選擇一個過敏源或按下一步繼續");
+    if (!gfr || !ckd || !disease) {
+      alert("請完整填寫所有項目！");
       return;
     }
 
-    alert(`你選擇的過敏源：${selectedAllergens.join("、")}\n\n👉 前往下一頁`);
-    navigate("/allergy"); 
+    alert(`已填寫內容：\nGFR：${gfr} ml/min\nCKD 期數：第 ${ckd} 期\n其他慢性疾病：${disease}\n\n👉 下一頁準備開始！`);
+    navigate("/allergy"); // 直接跳轉到 1-3 過敏源頁面
   };
 
   return (
     <div className="min-h-screen w-full bg-white flex justify-center p-5">
       <div className="max-w-[390px] w-full text-center">
-        <h2 className="text-2xl text-pink-400 mb-6">過敏源</h2>
+        <div className="logo mb-5">
+          <img
+            src="https://i.postimg.cc/Wp5Pbz2G/2025-06-10-155707.png"
+            alt="腎臟圖"
+            className="w-[150px] max-w-[80%] mx-auto mb-5"
+          />
+        </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          {allergens.map((item) => (
-            <div
-              key={item.label}
-              onClick={() => toggleSelection(item.label)}
-              className={`cursor-pointer p-3 rounded-lg transition ${
-                selectedAllergens.includes(item.label)
-                  ? "border-4 border-red-400 bg-pink-100"
-                  : "border-2 border-pink-300 bg-white"
-              }`}
-            >
-              <img
-                src={item.img}
-                alt={item.label}
-                className="w-16 h-16 object-contain mx-auto mb-2"
-              />
-              <div className="font-bold">{item.label}</div>
-            </div>
-          ))}
+        <h2 className="text-2xl mb-6">腎病概況</h2>
+
+        {/* GFR */}
+        <div className="mb-5 text-left">
+          <label htmlFor="gfr" className="font-bold mb-2 block">
+            腎絲球過濾率 (GFR)
+          </label>
+          <div className="flex items-center bg-pink-100 p-3 rounded-full justify-between">
+            <input
+              type="number"
+              id="gfr"
+              placeholder="請輸入數值"
+              min="0"
+              value={gfr}
+              onChange={(e) => setGfr(e.target.value)}
+              className="bg-transparent outline-none w-3/4"
+            />
+            <span className="text-sm">ml/min</span>
+          </div>
+        </div>
+
+        {/* CKD */}
+        <div className="mb-5 text-left">
+          <label htmlFor="ckd" className="font-bold mb-2 block">
+            CKD (期數)
+          </label>
+          <select
+            id="ckd"
+            value={ckd}
+            onChange={(e) => setCkd(e.target.value)}
+            className="w-full p-3 rounded-lg bg-pink-100"
+          >
+            <option value="">請選擇</option>
+            <option value="1">第一期</option>
+            <option value="2">第二期</option>
+            <option value="3">第三期</option>
+            <option value="4">第四期</option>
+            <option value="5">第五期</option>
+          </select>
+        </div>
+
+        {/* 慢性疾病 */}
+        <div className="mb-5 text-left">
+          <label htmlFor="disease" className="font-bold mb-2 block">
+            其他慢性疾病
+          </label>
+          <select
+            id="disease"
+            value={disease}
+            onChange={(e) => setDisease(e.target.value)}
+            className="w-full p-3 rounded-lg bg-pink-100"
+          >
+            <option value="">請選擇</option>
+            <option value="高血壓">高血壓</option>
+            <option value="糖尿病">糖尿病</option>
+            <option value="心臟病">心臟病</option>
+            <option value="其他">其他</option>
+            <option value="無">無</option>
+          </select>
         </div>
 
         <button
           onClick={handleNext}
-          className="bg-red-400 text-white py-3 px-8 rounded-full text-lg hover:bg-red-500"
+          className="w-full bg-red-400 text-white py-3 rounded-lg text-lg hover:bg-red-500"
         >
-          下一步
+          下一頁
         </button>
       </div>
     </div>
