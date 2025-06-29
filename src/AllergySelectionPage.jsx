@@ -28,7 +28,7 @@ export default function AllergySelectionPage() {
     }
 
     alert(`你選擇的過敏源：${selectedAllergens.join("、")}\n\n👉 前往下一頁`);
-    navigate("/exercise");
+    navigate("/exercise"); // 下一頁請自行調整
   };
 
   return (
@@ -41,11 +41,11 @@ export default function AllergySelectionPage() {
             <div
               key={item.label}
               onClick={() => toggleSelection(item.label)}
-              className={`cursor-pointer border-2 p-3 rounded-lg transition ${
+              className={`cursor-pointer p-3 rounded-lg transition ${
                 selectedAllergens.includes(item.label)
-                  ? "border-red-400"
-                  : "border-pink-300"
-              } bg-white`}
+                  ? "border-4 border-red-400 bg-pink-100"
+                  : "border-2 border-pink-300 bg-white"
+              }`}
             >
               <img
                 src={item.img}
