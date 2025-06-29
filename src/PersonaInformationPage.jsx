@@ -6,6 +6,7 @@ export default function PersonaInformationPage() {
   const [month, setMonth] = useState(1);
   const [day, setDay] = useState(1);
   const [age, setAge] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     updateAge();
@@ -28,7 +29,7 @@ export default function PersonaInformationPage() {
       return;
     }
     alert(`已選擇：\n性別：${selectedGender}\n生日：${year}年 ${month}月 ${day}日\n年齡：${age} 歲\n\n（下一頁可以開始囉！）`);
-    // window.location.href = '/nextpage'; // 可替換為下一頁路徑
+    navigate("/kidney");
   };
 
   const years = Array.from({ length: new Date().getFullYear() - 1920 + 1 }, (_, i) => 1920 + i);
