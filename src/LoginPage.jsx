@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // ✅ 加這行
 
   const handleLogin = () => {
     if (!account || !password) {
@@ -10,6 +12,9 @@ export default function LoginPage() {
       return;
     }
     alert(`登入帳號：${account}`);
+
+    // ✅ 登入成功後跳轉到 persona 頁
+    navigate("/persona");
   };
 
   return (
