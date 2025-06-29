@@ -16,7 +16,7 @@ export default function KidneyStatusPage() {
     alert(`已填寫內容：\nGFR：${gfr} ml/min\nCKD 期數：第 ${ckd} 期\n其他慢性疾病：${disease}\n\n👉 下一頁準備開始！`);
 
     // 跳轉下一頁（可修改為你下一個頁面的路由）
-    // navigate("/next-page");
+    navigate("/allergy");
   };
 
   return (
